@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Hangfire" Version="1.8.11" />
+        <PackageReference Include="Hangfire.Dashboard.Basic.Authentication" Version="7.0.1" />
+        <PackageReference Include="Hangfire.Storage.SQLite" Version="0.4.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Vani.Domain\Vani.Domain.csproj" />
+      <ProjectReference Include="..\Vani.Infras\Vani.Infras.csproj" />
+      <ProjectReference Include="..\Vani.Services\Vani.Services.csproj" />
+      <ProjectReference Include="..\Vani.Shared\Vani.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="v1\" />
+    </ItemGroup>
+
+</Project>
