@@ -24,8 +24,6 @@ builder.Services.AddCors(options =>
     })
 );
 
-builder.Services.AddControllers();
-
 // hangfire
 builder.Services.AddHangfire(options =>
     options.UseSimpleAssemblyNameTypeSerializer()
@@ -33,6 +31,11 @@ builder.Services.AddHangfire(options =>
         .UseSQLiteStorage(builder.Configuration.GetConnectionString("hangfire")));
 builder.Services.AddHangfireServer();
 
+
+builder.Services.AddControllers();
+
+// key-scoped feature
+//builder.Services.AddKeyedScoped<ICarService, CarService>(nameof(CarService));
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IMakeService, MakeService>();
 
@@ -76,7 +79,6 @@ builder.Services.AddGarageDbContext(builder.Configuration);
 
 builder.Services.AddIdentityCore<AppUser>(options =>
     {
-        options.User.RequireUniqueEmail = true;
         options.User.RequireUniqueEmail = true;
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 4;

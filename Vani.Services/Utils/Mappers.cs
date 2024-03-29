@@ -21,14 +21,12 @@ public static class GarageMappers
     {
         return new CarResponseDto
         {
-            Id = car.Id,
             Make = car.Make.Name,
             Model = car.Model,
             Year = car.Year,
             Color = car.Color,
             Mileage = car.Mileage,
-            DateTimeCreated = car.DateTimeCreated,
-            LastModifiedDateTime = car.LastModifiedDateTime
+           LastModifiedDateTime = car.LastModifiedDateTime
         };
     }
     

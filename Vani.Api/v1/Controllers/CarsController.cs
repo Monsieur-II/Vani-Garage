@@ -14,6 +14,8 @@ public class CarsController : ControllerBase
 {
     private readonly ICarService _carService;
 
+    // injecting with keyed service method
+    // public CarsController([FromKeyedServices(nameof(carService))]ICarService carService)
     public CarsController(ICarService carService)
     {
         _carService = carService;

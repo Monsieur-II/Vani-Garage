@@ -12,7 +12,7 @@ public static class EmailSender
         try
         {
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(config.Username));
+            email.From.Add(new MailboxAddress("VaniGarage", config.Username));
             email.To.Add(MailboxAddress.Parse(recipient));
             email.Subject = "Confirm Email";
             email.Body = new TextPart(TextFormat.Html) { Text = body };
@@ -26,7 +26,7 @@ public static class EmailSender
         catch (Exception ex)
         {
             Console.WriteLine("Error in sending email: " + ex.Message);
-            throw;
+            //throw;
         }
     }
 }

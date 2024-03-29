@@ -2,7 +2,7 @@ namespace Vani.Services.Cache;
 
 public interface ICacheService
 {
-    IEnumerable<T>?GetData<T>(string key);
-    bool SetData<T>(string key, T value, DateTimeOffset expirationTime);   
+    public IEnumerable<T>? GetData<T>(string key);
+    bool SetData<T>(string key, IEnumerable<T> value, DateTimeOffset expirationTime);   
     object RemoveData(string key);
 }
