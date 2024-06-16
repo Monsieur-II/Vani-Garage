@@ -2,20 +2,23 @@ using Microsoft.EntityFrameworkCore;
 using Vani.Infras;
 using Vani.Services.Cache;
 using Vani.Domain.Models;
-using Vani.Services.Utils;
+using Vani.Services.Kafka;
+using Vani.Shared;
 using Vani.Shared.DTOS.Makes;
 
 namespace Vani.Services.Makes;
 
 public class MakeService : IMakeService
 {
-    private VaniDbContext _context;
-    private ICacheService _cacheService;
+    private readonly VaniDbContext _context;
+    private readonly ICacheService _cacheService;
+    private readonly IKafkaService _kafkaService;
 
-    public MakeService(VaniDbContext context, ICacheService cacheService)
+    public MakeService(VaniDbContext context, ICacheService cacheService, IKafkaService kafkaService)
     {
         _context = context;
         _cacheService = cacheService;
+        _kafkaService = kafkaService;
     }
 
     public async Task<Make> CreateMake(CreateMakeDto make)
@@ -36,6 +39,8 @@ public class MakeService : IMakeService
     public async Task<IEnumerable<Make>> GetMakes()
     {
         var makes = await _context.Makes.Include(m => m.Cars).ToListAsync();
+        await _kafkaService.ProduceMessageAsync(Constants.GarageTopic, "Makes retrieved");
+        
 
         return makes;
     }

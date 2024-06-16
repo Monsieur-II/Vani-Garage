@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Vani.Services.Cars;
 using Vani.Services.Utils;
 using Vani.Shared.DTOS.Cars;
-using Vani.Shared.Exceptions;
 
 namespace Vani.Api.v1.Controllers;
 

@@ -1,7 +1,5 @@
 using Vani.Infras;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Vani.Api.Extensions;
 

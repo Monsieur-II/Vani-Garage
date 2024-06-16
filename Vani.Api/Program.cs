@@ -1,4 +1,5 @@
 using System.Text;
+using Confluent.Kafka;
 using Hangfire;
 using Hangfire.Storage.SQLite;
 using HangfireBasicAuthenticationFilter;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Vani.Api.Extensions;
 using Vani.Services.Cache;
 using Vani.Services.Cars;
+using Vani.Services.Kafka;
 using Vani.Services.Makes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +40,8 @@ builder.Services.AddControllers();
 //builder.Services.AddKeyedScoped<ICarService, CarService>(nameof(CarService));
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IMakeService, MakeService>();
+builder.Services.AddScoped<IKafkaService, KafkaService>();
+builder.Services.AddHostedService<ConsumerService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -112,6 +116,8 @@ builder.Services.AddAuthorization();
 // JWTConfig / EmailConfig
 builder.Services.Configure<JWTConfig>(builder.Configuration.GetSection(nameof(JWTConfig)));
 builder.Services.Configure<EmailConfig>(builder.Configuration.GetSection(nameof(EmailConfig)));
+builder.Services.Configure<ProducerConfig>(builder.Configuration.GetSection(nameof(ProducerConfig)));
+builder.Services.Configure<ConsumerConfig>(builder.Configuration.GetSection(nameof(ConsumerConfig)));
 
 var hangfireUser = builder.Configuration["HangfireConfig:username"];
 var hangfirePass = builder.Configuration["HangfireConfig:password"];
